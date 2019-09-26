@@ -1,0 +1,11 @@
+<ng-container *ngIf="tasksDone.length >0;else noDone">
+  Zadania zrobione: {{tasksDone.length}}
+  <ul>
+    <li *ngFor="let task of tasksDone">
+      {{task}}
+    </li>
+  </ul>
+</ng-container>
+<ng-template #noDone>
+  Brak wykonanych zadań.
+</ng-template>

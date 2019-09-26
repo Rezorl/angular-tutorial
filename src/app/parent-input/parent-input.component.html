@@ -1,0 +1,37 @@
+<!-- <app-podstawy></app-podstawy> -->
+<!-- <app-data-binding></app-data-binding> -->
+<!-- <app-task-list></app-task-list> -->
+
+<!-- Interakcja komponentów -->
+<!-- Komunikowanie się między komponentami -->
+
+                <!-- PARENT COMPONENT -->
+        <!-- W DÓŁ -->        <!-- W GÓRE -->
+        <!-- @Input -->       <!-- @Ouput -->
+<!-- CHILD COMPONENT -->   <!-- CHILD COMPONENT -->
+
+<!-- @Input rodzic przekazuje dane do dziecka, informacje -->
+<!-- @Ouput dziecko może poinformować rodzica o jakimś wydarzeniu, evencie -->
+<!-- Komunikacja między nimi odbywa się poprzez property binding i event binding -->
+<!-- Różnica jest taka, że nie korzystamy z gotoywch propertiesów i -->
+<!-- eventów, tylko sami będziemy je tworzyć a dopiero potem wykorzystywać-->
+
+
+<!-- @Input -->
+<!-- Komunikacja między Parent a Child -->
+<!-- [tasks] ustawiamy propety, komponent child dostanie liste zadań od rodzica i ją wyświetli -->
+<app-child-input [tasks]="tasksList" (eventTask)="selected($event)"></app-child-input>
+<!-- @Output -->
+<!-- Komunikacje między Child a Parent -->
+<!-- (eventTask) ten event nazywa się tak samo jak ten co utworzyliśmy u dziecka -->
+<!-- rodzic może go przechwycić i stworzyć własną metode w której np. usuwanie dane zadanie z listy dziecka -->
+
+
+<!--<ng-content></ng-content>-->
+<!--uzywamy gdy chcemy przeslac jakis kod html np:-->
+<!--<child>
+<h1>Hello</h1>
+</child>-->
+<!--W tej sytuacji komponent Child w swoim htmlu powininen miec ng-content w miejscu gdzie chce wyswietlic dane od Parent-->
+
+

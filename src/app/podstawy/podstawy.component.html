@@ -1,0 +1,73 @@
+
+<app-data-binding></app-data-binding>
+
+<div>----------------------------------------------------------------------</div>
+<p>
+  {{title | uppercase}}<br>
+  Liczba PI to: {{pi | number: '1.1-2'}}<br>
+  Dzisiaj jest {{date | date: 'dd-MM-yyyy'}}<br>
+  Mój jest pies wabi się: {{dog?.name}}<br>
+  Mój jest pies wabi się: {{dog && dog.name}}<br>
+  Ma {{dog?.age}} lata <br>
+  {{showDog() | titlecase}}<br>
+  Działania na liczbach:<br>
+  2+2={{2+2}}<br>
+  5-3={{5-3}}
+</p>
+
+<div *ngIf="days.length > 0">
+  <p>Dni tygodnia:</p>
+  <ul>
+    <li *ngFor="let day of days">{{day}}</li>
+  </ul>
+</div>
+
+<!--even, odd, first, last, index-->
+<ng-container *ngIf="dogs.length >0; else noDogs">
+  <p>Lista psów:</p>
+  <div *ngFor="let dog of dogs; let i = index">
+    <ng-container *ngIf="dog.age > 3">
+      {{i}}. Mój pies ma na imię {{dog.name}} i ma {{dog.age}} lata.
+    </ng-container>
+  </div>
+</ng-container>
+
+<ng-template #noDogs>
+  <p>Nie ma żadnych piesków</p>
+</ng-template>
+
+<!--LUB-->
+<!--IF-->
+<ng-container *ngIf="dogs.length >0; then areDogs1; else noDogs1"></ng-container>
+
+<ng-template #areDogs1>
+  <ng-container *ngFor="let dog of dogs; let i = index">
+    <div>{{i}}. Mój pies ma na imię {{dog.name}} i ma {{dog.age}} lata.</div>
+  </ng-container>
+</ng-template>
+
+<ng-template #noDogs1>
+  <p>Nie ma żadnych piesków</p>
+</ng-template>
+
+<button (click)="addDogs()">Dodaj</button>
+<button (click)="removeDogs()">Usuń</button>
+
+<app-test *ngFor="let i of [1,2,3,4]"></app-test>
+
+<!--SWITCH-->
+<ng-container *ngFor="let day of days">
+  <ng-container [ngSwitch]="day">
+      <div *ngSwitchCase="'Poniedziałek'">Monday</div>
+      <div *ngSwitchCase="'Wtorek'">Tuesday</div>
+      <div *ngSwitchCase="'Środa'">Wednesday</div>
+      <div *ngSwitchCase="'Czwartek'">Thursday</div>
+      <div *ngSwitchCase="'Piątek'">Friday</div>
+      <div *ngSwitchCase="'Sobota'">Saturday</div>
+      <div *ngSwitchCase="'Niedziela'">Sunday</div>
+      <div *ngSwitchDefault>{{day}} nie jest dniem tygodnia</div>
+  </ng-container>
+</ng-container>
+
+<!--[hidden] ukrywa element na stronie, ale nie usuwam go z DOM-->
+<!--*ngIf ukrywa element na stronie i usuwa go z DOM-->

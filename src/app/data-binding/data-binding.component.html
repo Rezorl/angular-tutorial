@@ -1,0 +1,42 @@
+<!-- Property Binding [target]="expression" komunikacja z komponentu do widoku html-->
+<!-- Two-Way-Binding ([ngModel])="expression" komunikacja miedyz komponentem a widokiem i miedzy widokiem i komponentem-->
+<!-- Event Binding (target)="statement" reagujemy na zdarzenia wywolane przez uzytkownika z widoku do komponentu-->
+
+<!-- Property Binding to co wydarzy sie na stronie nie moze zmienic się w Component -->
+
+<!-- All properties here:  https://www.w3schools.com/tags/tag_input.asp -->
+<h3 [className]="colorClass">Property Binding</h3>
+<img [src]="logoUrl">
+<input [maxLength]="maxLength" [value]="inputText">
+<button [disabled]="isDisable" (click)="change()">Dodaj</button>
+
+
+<!--Event Binding służy do bindowania wydarzeń w kontrolkach HTML, które przechwytuje Component -->
+
+<br>
+Event Binding<br>
+<input (focus)="onFocus()">
+<br>
+<input (click)="onCLick($event)">
+<br>
+<input [value]="'mousemove'" (mousemove)="onMouseMove($event)">
+<br>
+<input (paste)="onPaste($event)">
+<br>
+<input (input)="onInput($event)" >
+
+<br>
+-------------------------------------------------------
+<br>
+
+<!-- Two-Way-Binding -->
+<!-- Musimy zaimportowac dodatkowy modul: FormsModule -->
+<!-- [(ngModel)] -->
+Two-Way-Binding<br>
+Twoj zawod to {{proffesion}} a umiejetnosc to {{skill}}
+<br>
+<label>Zawód:</label>
+<input [(ngModel)]="proffesion">
+<br>
+<label>Umiejętność:</label>
+<input [(ngModel)]="skill">

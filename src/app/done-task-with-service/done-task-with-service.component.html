@@ -1,0 +1,11 @@
+<ng-container *ngIf="tasksDone.length >0;else noDone">
+  Zadania zrobione: {{tasksDone.length}}
+  <ul>
+    <li appChecked appDate [date]="task.endDate" *ngFor="let task of tasksDone">
+      {{task.name | transformTask: '-super!'}}
+    </li>
+  </ul>
+</ng-container>
+<ng-template #noDone>
+  Brak wykonanych zadań.
+</ng-template>
