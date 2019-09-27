@@ -1,15 +1,31 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Post} from "../../example-http/example-http.component";
-import {Observable} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private http: HttpClient) {
+  private postsObs = new BehaviorSubject<Array<Post>>([]);
+  posts$ = this.postsObs.asObservable();
 
+
+
+  constructor(private http: HttpClient) {
+    this.getPosts2();
+  }
+
+  //HttpInterceptor - mozna logowac kazde zapytanie, dopisywac naglowki ktore powtarzaja sie w kazdym zapytaniu
+
+  getPosts2() {
+    return this.http.get<Array<Post>>("https://jsonplaceholder.typicode.com/posts").subscribe(posts => {
+        this.postsObs.next(posts);
+      },
+      error => {
+        console.log(error);
+      });
   }
 
   // pobieramy wszystkie posty

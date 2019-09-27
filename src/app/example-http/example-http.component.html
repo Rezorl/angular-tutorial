@@ -6,4 +6,8 @@
   <button class="btn btn-success" (click)="updatePost()">updatePost</button>
   <button class="btn btn-success" (click)="deletePost()">deletePost</button>
   <button class="btn btn-success" (click)="changePost()">changePost</button>
+  <button class="btn btn-success" (click)="getPostsToObservable()">getPostsToObservable</button>
+</div>
+<div *ngFor="let post of allPosts$ | async">
+  {{post.title}}
 </div>

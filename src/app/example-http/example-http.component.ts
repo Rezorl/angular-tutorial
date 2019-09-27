@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpService} from "../services/http/http.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {retry} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-example-http',
@@ -10,11 +11,22 @@ import {retry} from "rxjs/operators";
 })
 export class ExampleHttpComponent implements OnInit {
 
+  //async pipe
+  allPosts$: Observable<Array<Post>>;
+
   constructor(private httpService: HttpService) {
 
   }
 
   ngOnInit() {
+  }
+
+  getPosts3(){
+    this.allPosts$ = this.httpService.posts$;
+  }
+
+  getPostsToObservable(){
+    this.allPosts$ = this.httpService.getPosts();
   }
 
   // .retry(3) jezeli rzuci bledem to jeszcze 3 razy sprobujemy odpytac serwer

@@ -31,7 +31,19 @@ import { TransformTaskPipe } from './shared/transform-task.pipe';
 import { SortNamePipe } from './shared/sort-name.pipe';
 import { ExampleHttpComponent } from './example-http/example-http.component';
 import {HttpService} from "./services/http/http.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {SpyInterceptor} from "./spy.interceptor";
+import {AuthInterceptor} from "./auth.interceptor";
+import { RoutingExampleComponent } from './routing-example/routing-example.component';
+import { HomeComponent } from './home/home.component';
+import { CoursesComponent } from './courses/courses.component';
+import { AboutComponent } from './about/about.component';
+import {AppRoutingModule} from "./app.routing.module";
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {DataBaseService} from "./services/data-base/data-base.service";
+import { CourseDetailsComponent } from './course-details/course-details.component';
+import { CourseListComponent } from './course-list/course-list.component';
+import { Courses2Component } from './courses2/courses2.component';
 
 @NgModule({
   // components, pipes, directives
@@ -61,20 +73,40 @@ import {HttpClientModule} from "@angular/common/http";
     DateDirective,
     TransformTaskPipe,
     SortNamePipe,
-    ExampleHttpComponent
+    ExampleHttpComponent,
+    RoutingExampleComponent,
+    HomeComponent,
+    CoursesComponent,
+    AboutComponent,
+    PageNotFoundComponent,
+    CourseDetailsComponent,
+    CourseListComponent,
+    Courses2Component
   ],
   // add new modules
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   // services
   providers: [
     ClickService,
     LogService,
     TasksService,
-    HttpService
+    HttpService,
+    DataBaseService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpyInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   // start component
   bootstrap: [AppComponent]
